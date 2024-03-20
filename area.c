@@ -289,7 +289,7 @@ int main() {
      state_of_units=0;
 
     }
-    printf("%i",state_of_units);
+    //printf("%i",state_of_units);
 
     if (state_of_units==0)
     printf("\nERROR:Incompatible inter_conversions\n");

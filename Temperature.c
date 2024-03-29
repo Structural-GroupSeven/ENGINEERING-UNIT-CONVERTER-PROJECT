@@ -32,32 +32,77 @@ float kelvin_to_fahrenheit(float kelvin) {
 
 int main() {
     float temperature;
-    char unit;
+    char fromUnit, toUnit;
 
     printf("Enter temperature value: ");
     scanf("%f", &temperature);
 
     printf("Enter temperature unit (C, F, K): ");
-    scanf(" %c", &unit);
+    scanf(" %c", &fromUnit);
 
-    switch (unit) {
+    printf("Enter unit to convert to (C, F, K): ");
+    scanf(" %c", &toUnit);
+
+    switch (fromUnit) {
         case 'C':
         case 'c':
-            printf("Temperature in Celsius: %.2f\n", temperature);
-            printf("Temperature in Fahrenheit: %.2f\n", celsius_to_fahrenheit(temperature));
-            printf("Temperature in Kelvin: %.2f\n", celsius_to_kelvin(temperature));
+            switch (toUnit) {
+                case 'C':
+                case 'c':
+                    printf("Temperature in Celsius: %.2f\n", temperature);
+                    break;
+                case 'F':
+                case 'f':
+                    printf("Temperature in Fahrenheit: %.2f\n", celsius_to_fahrenheit(temperature));
+                    break;
+                case 'K':
+                case 'k':
+                    printf("Temperature in Kelvin: %.2f\n", celsius_to_kelvin(temperature));
+                    break;
+                default:
+                    printf("Invalid unit entered\n");
+                    break;
+            }
             break;
         case 'F':
         case 'f':
-            printf("Temperature in Fahrenheit: %.2f\n", temperature);
-            printf("Temperature in Celsius: %.2f\n", fahrenheit_to_celsius(temperature));
-            printf("Temperature in Kelvin: %.2f\n", fahrenheit_to_kelvin(temperature));
+            switch (toUnit) {
+                case 'C':
+                case 'c':
+                    printf("Temperature in Celsius: %.2f\n", fahrenheit_to_celsius(temperature));
+                    break;
+                case 'F':
+                case 'f':
+                    printf("Temperature in Fahrenheit: %.2f\n", temperature);
+                    break;
+                case 'K':
+                case 'k':
+                    printf("Temperature in Kelvin: %.2f\n", fahrenheit_to_kelvin(temperature));
+                    break;
+                default:
+                    printf("Invalid unit entered\n");
+                    break;
+            }
             break;
         case 'K':
         case 'k':
-            printf("Temperature in Kelvin: %.2f\n", temperature);
-            printf("Temperature in Celsius: %.2f\n", kelvin_to_celsius(temperature));
-            printf("Temperature in Fahrenheit: %.2f\n", kelvin_to_fahrenheit(temperature));
+            switch (toUnit) {
+                case 'C':
+                case 'c':
+                    printf("Temperature in Celsius: %.2f\n", kelvin_to_celsius(temperature));
+                    break;
+                case 'F':
+                case 'f':
+                    printf("Temperature in Fahrenheit: %.2f\n", kelvin_to_fahrenheit(temperature));
+                    break;
+                case 'K':
+                case 'k':
+                    printf("Temperature in Kelvin: %.2f\n", temperature);
+                    break;
+                default:
+                    printf("Invalid unit entered\n");
+                    break;
+            }
             break;
         default:
             printf("Invalid unit entered\n");

@@ -1,65 +1,106 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-typedef struct {
-    char *name;
-    double factor;
-} Unit;
-
-typedef struct {
-    char *name;
-    Unit *units;
-    int num_units;
-} System;
-
-Unit volume_units[] = {
-    {"cubic_meter", 1.0},
-    {"cubic_kilometer", 1000000000.0},
-    {"cubic_centimeter", 0.000001},
-    {"cubic_millimeter", 0.000000001},
-    {"liter", 0.001},
-    {"gallon", 0.00378541},
-    {"cubic_inch", 0.0000163871},
-    {"cubic_foot", 0.0283168},
-};
-
-System volume_system = {"volume", volume_units, sizeof(volume_units) / sizeof(Unit)};
-
-void display_units(System *system) {
-    printf("\nUnits for the %s system:\n", system->name);
-    for (int i = 0; i < system->num_units; i++) {
-        printf("%d. %s\n", i, system->units[i].name);
-    }
-    printf("Choose a unit to convert from: ");
-}
-
-double convert(System *from_system, System *to_system, int from_unit_index, double from_value, int to_unit_index) {
-    double from_factor = from_system->units[from_unit_index].factor;
-    double to_factor = to_system->units[to_unit_index].factor;
-    return from_value * from_factor / to_factor;
-}
+// Function prototypes
+double l_to_m3(double l);
+double m3_to_l(double m3);
+double l_to_ml(double l);
+double ml_to_l(double ml);
+double l_to_gal(double l);
+double gal_to_l(double gal);
+double l_to_floz(double l);
+double floz_to_l(double floz);
 
 int main() {
-    double from_value, to_value;
-    int from_unit_index, to_unit_index;
+    int choice;
+    double volume;
 
-    System *from_system = &volume_system;
-    System *to_system = &volume_system;
+    printf("Choose a conversion:\n");
+    printf("1. Liters to Cubic Meters\n");
+    printf("2. Cubic Meters to Liters\n");
+    printf("3. Liters to Milliliters\n");
+    printf("4. Milliliters to Liters\n");
+    printf("5. Liters to Gallons\n");
+    printf("6. Gallons to Liters\n");
+    printf("7. Liters to Fluid Ounces\n");
+    printf("8. Fluid Ounces to Liters\n");
+    printf("Enter your choice (1 to 8): ");
+    scanf("%d", &choice);
 
-    // Display the units for the user to choose from
-    display_units(from_system);
-    scanf("%d", &from_unit_index);
-
-    printf("Enter the value to convert: ");
-    scanf("%lf", &from_value);
-
-    // Display the units for the user to choose to
-    display_units(to_system);
-    scanf("%d", &to_unit_index);
-
-    to_value = convert(from_system, to_system, from_unit_index, from_value, to_unit_index);
-
-    printf("Result: %lf %s = %lf %s\n", from_value, from_system->units[from_unit_index].name, to_value, to_system->units[to_unit_index].name);
+    switch (choice) {
+        case 1:
+            printf("Enter volume in liters: ");
+            scanf("%lf", &volume);
+            printf("%.2lf liters is equal to %.2lf cubic meters\n", volume, l_to_m3(volume));
+            break;
+        case 2:
+            printf("Enter volume in cubic meters: ");
+            scanf("%lf", &volume);
+            printf("%.2lf cubic meters is equal to %.2lf liters\n", volume, m3_to_l(volume));
+            break;
+        case 3:
+            printf("Enter volume in liters: ");
+            scanf("%lf", &volume);
+            printf("%.2lf liters is equal to %.2lf milliliters\n", volume, l_to_ml(volume));
+            break;
+        case 4:
+            printf("Enter volume in milliliters: ");
+            scanf("%lf", &volume);
+            printf("%.2lf milliliters is equal to %.2lf liters\n", volume, ml_to_l(volume));
+            break;
+        case 5:
+            printf("Enter volume in liters: ");
+            scanf("%lf", &volume);
+            printf("%.2lf liters is equal to %.2lf gallons\n", volume, l_to_gal(volume));
+            break;
+        case 6:
+            printf("Enter volume in gallons: ");
+            scanf("%lf", &volume);
+            printf("%.2lf gallons is equal to %.2lf liters\n", volume, gal_to_l(volume));
+            break;
+        case 7:
+            printf("Enter volume in liters: ");
+            scanf("%lf", &volume);
+            printf("%.2lf liters is equal to %.2lf fluid ounces\n", volume, l_to_floz(volume));
+            break;
+        case 8:
+            printf("Enter volume in fluid ounces: ");
+            scanf("%lf", &volume);
+            printf("%.2lf fluid ounces is equal to %.2lf liters\n", volume, floz_to_l(volume));
+            break;
+        default:
+            printf("Invalid choice\n");
+    }
 
     return 0;
+}
+
+// Function definitions
+double l_to_m3(double l) {
+    return l / 1000.0;
+}
+
+double m3_to_l(double m3) {
+    return m3 * 1000.0;
+}
+
+double l_to_ml(double l) {
+    return l * 1000.0;
+}
+
+double ml_to_l(double ml) {
+    return ml / 1000.0;
+}
+
+double l_to_gal(double l) {
+    return l / 3.78541;
+}double gal_to_l(double gal) {
+    return gal * 3.78541;
+}
+
+double l_to_floz(double l) {
+    return l * 33.814;
+}
+
+double floz_to_l(double floz) {
+    return floz / 33.814;
 }
